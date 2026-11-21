@@ -6,7 +6,27 @@ import datetime
 from sklearn.decomposition import PCA
 
 # 1. Сбор данных через API Мосбиржи (MOEX ISS)
-tickers = ['SBER', 'GAZP', 'LKOH', 'ROSN', 'NVTK', 'PLZL', 'MGNT', 'MTSS', 'CHMF', 'TATN']
+tickers = [
+    # 1. Финансовый сектор (зависят от ставки ЦБ)
+    'SBER',  # Сбербанк
+    'VTBR',  # Банк ВТБ
+    'SVCB',  # Совкомбанк
+    
+    # 2. Нефтегазовый сектор (экспортеры, зависят от валюты и цен на сырье)
+    'LKOH',  # Лукойл
+    'TATN',  # Татнефть
+    'ROSN',  # Роснефть
+    
+    # 3. Ритейл / Внутреннее потребление
+    'MGNT',  # Магнит
+    'LENT',  # Лента
+    'X5',    # X5клуб
+    
+    # 4. Металлургия
+    'CHMF',  # Северсталь
+    'MAGN',  # ММК
+    'GMKN'   # Норникель
+]
 end_date = datetime.date.today()
 start_date = end_date - datetime.timedelta(days=365) # За последний год
 
@@ -111,7 +131,7 @@ for i in range(m):
 
 plt.axhline(0, color='grey', linestyle='--', linewidth=0.8)
 plt.axvline(0, color='grey', linestyle='--', linewidth=0.8)
-plt.title('Biplot: Кластеризация российских акций (MOEX)')
+plt.title('Biplot: Взаимосвязи российских акций (MOEX)')
 plt.xlabel('PC1 (Нагрузки)')
 plt.ylabel('PC2 (Нагрузки)')
 plt.grid(True, linestyle=':', alpha=0.7)
